@@ -1,6 +1,15 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        String x = ("(112, 52)");
-        System.out.println(x.substring(1, x.length() - 1).split(",")[1]);
+        System.out.println("Hello, enter your first coordinates");
+        Scanner scan = new Scanner(System.in);
+        String coordinate1 = scan.nextLine();
+        String[] coord1List = coordinate1.substring(1, coordinate1.length() - 1).split(", ");
+        System.out.println("second");
+        String coordinate2 = scan.nextLine();
+        LinearEquation li = new LinearEquation(coordinate1, coordinate2);
+        System.out.println(li);
+
     }
 }
