@@ -38,6 +38,7 @@ public class LinearEquation {
     }
 
     public String returnSlope () {
+
         if (this.slope % 2 == 0 && this.slope > 1){
 
             return String.valueOf(this.slope);
