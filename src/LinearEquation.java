@@ -1,13 +1,13 @@
 import java.text.DecimalFormat;
 // Decimal Format
 public class LinearEquation {
-    private double xOne;
-    private double xTwo;
-    private double yOne;
-    private double yTwo;
+    final private double xOne;
+    final private double xTwo;
+    final private double yOne;
+    final private double yTwo;
     private double xThree;
-    private String firstPair;
-    private String secondPair;
+    final private String firstPair;
+    final private String secondPair;
 
     private double changeY;
     private double changeX;
@@ -17,18 +17,25 @@ public class LinearEquation {
 
     DecimalFormat d = new DecimalFormat("#.##");
 
+    // Constructor for class
     public LinearEquation(String coord1, String coord2){
         this.firstPair = coord1;
         this.secondPair = coord2;
+
+        // Logic for separating coordinate values from strings using split
         String[] coord1List = coord1.substring(1, coord1.length() - 1).split(", ");
         String[] coord2List = coord2.substring(1, coord2.length() - 1).split(", ");
+
+
         this.xOne = Double.parseDouble(coord1List[0]);
         this.yOne = Double.parseDouble(coord1List[1]);
         this.xTwo = Double.parseDouble(coord2List[0]);
         this.yTwo = Double.parseDouble(coord2List[1]);
+
+        // Calculating values
         calculateSlope();
         calculateDistance();
-        calculateYInterceptString();
+        calculateYIntercept();
 
     }
 
@@ -38,21 +45,21 @@ public class LinearEquation {
     }
 
     public String returnSlope () {
-
+        // Whole number case
         if (this.slope % 2 == 0 && this.slope > 1){
-
             return String.valueOf(this.slope);
         }
+        // Equal to one case
         if (this.slope == 1){
             return "";
         }
-
-        if ((this.xTwo - this.xOne) < 0){
+        // Eliminating double negative signs
+        if (this.slope < 0){
             return "-" + d.format(this.yTwo - this.yOne) + "/" +  d.format(Math.abs((this.xTwo - this.xOne)));
         }
-        return d.format(this.yTwo - this.yOne) + "/" +  d.format(Math.abs((this.xTwo - this.xOne)));
-
-
+        else {
+            return d.format(Math.abs(this.yTwo - this.yOne)) + "/" +  d.format(Math.abs((this.xTwo - this.xOne)));
+        }
     }
 
     public double calculateDistance() {
@@ -60,33 +67,41 @@ public class LinearEquation {
         return this.distance;
     }
 
+    // Add third coordinate
     public void addX(int x){
         this.xThree = x;
     }
 
+    // Solve with extra coordinate, returns coordinate up to 2 decimal values
     public String solveCoordinate(){
         double solvedX = this.xThree;
         double solvedY = (this.slope * solvedX) + this.yIntercept;
-        return String.format("(%.1f, %.1f)", solvedX, solvedY);
+        return String.format("(%.2f, %.2f)", solvedX, solvedY);
     }
-    public void calculateYInterceptString(){
+    // Calculate the Y-intercept
+    public void calculateYIntercept(){
         // y = mx + b
         this.yIntercept = this.yTwo - (this.xTwo * slope);
     }
+    // Return Y-intercept rounded to two decimal places
     public String returnYInterceptString(){
-
         return d.format(this.yIntercept);
     }
+
+    // Return slope intercept form
     public String returnSlopeInterceptForm(){
+        // When Y-intercept is equal to 0, don't print it
         if (this.yIntercept == 0) {
             return "y = " + returnSlope() + "x";
         }
+        // Handling double negatives if Y-intercept is negative
         else if (this.yIntercept < 0){
             return "y = " + returnSlope() + "x " + returnYInterceptString();
         }
         return "y = " + returnSlope() + "x + " + returnYInterceptString();
     }
 
+    // Overriding the print method for the class so it doesn't return a memory address
     public String toString(){
         String data = String.format("""
                         First Pair: %s
