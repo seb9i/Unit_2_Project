@@ -39,9 +39,8 @@ public class LinearEquation {
 
     }
 
-    public double calculateSlope() {
+    public void calculateSlope() {
         this.slope = (this.yTwo - this.yOne) / (this.xTwo - this.xOne);
-        return this.slope;
     }
 
     public String returnSlope () {
@@ -62,9 +61,8 @@ public class LinearEquation {
         }
     }
 
-    public double calculateDistance() {
+    public void calculateDistance() {
         this.distance = Math.sqrt(Math.pow(this.xTwo - this.xOne, 2) + Math.pow(this.yTwo-this.yOne, 2));
-        return this.distance;
     }
 
     // Add third coordinate
@@ -103,13 +101,12 @@ public class LinearEquation {
 
     // Overriding the print method for the class so it doesn't return a memory address
     public String toString(){
-        String data = String.format("""
+        return String.format("""
                         First Pair: %s
                         Second Pair: %s
                         Slope of Line: %.2f
                         Y intercept: %.2f
                         Slope Intercept Form: %s
                         Distance between points: %.2f""", firstPair, secondPair, this.slope, this.yIntercept, this.returnSlopeInterceptForm(), this.distance);
-        return data;
     }
 }
