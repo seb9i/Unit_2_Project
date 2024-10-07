@@ -1,5 +1,5 @@
 import java.text.DecimalFormat;
-
+// Decimal Format
 public class LinearEquation {
     private double xOne;
     private double xTwo;

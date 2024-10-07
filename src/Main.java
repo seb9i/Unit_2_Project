@@ -10,7 +10,7 @@ public class Main {
         String coordinate2 = scan.nextLine();
         LinearEquation li = new LinearEquation(coordinate1, coordinate2);
         System.out.println(li);
-        System.out.println("Third");
+        System.out.println("Please enter the third coordinate");
         int solved = scan.nextInt();
         li.addX(solved);
                 System.out.println("Solved Coordinate: "+ li.solveCoordinate());
